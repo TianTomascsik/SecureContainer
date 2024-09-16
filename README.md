@@ -20,20 +20,20 @@ Possible commands for `secure_container_cli` are `create`, `open`, `close`, `exp
 
 Example: 
 ```bash
-> ./secure_container_cli open <MOUNT_POINT> <PATH> <NAMESPACE> <ID> -auto_open
+> secure_container_cli open <MOUNT_POINT> <PATH> <NAMESPACE> <ID> -auto_open
 ```
 
 
 To run the `secure_container_daemon`:
 
 ```bash
-> ./secure_container_daemon
+> secure_container_daemon
 ```
 
 To run the `secure_container_cli`:
 
 ```bash
-> ./secure_container_cli <COMMAD>
+> secure_container_cli <COMMAD>
 ```
 
 ### Install debian package
@@ -48,7 +48,7 @@ For all the following examples, the `secure_container_daemon` must be started.
 
 1) Using the `secure_container_cli`:
 ```bash
-> ./secure_container_cli <COMMAND>
+> secure_container_cli <COMMAND>
 ```
 This will send a gRPC request to the `secure_container_daemon` to execute the command.
 This commandline tool can be used system-wide after installing the debian package.
@@ -116,10 +116,10 @@ cargo deb
 cargo test --all-features -- --test-threads 1 --nocapture
 
 # Run positive functionality tests
-./tests/positive_testing.sh
+tests/positive_testing.sh
 
 # Run negative functionality tests
-./tests/negative_testing.sh
+tests/negative_testing.sh
 ```
 
 ## Documentation
