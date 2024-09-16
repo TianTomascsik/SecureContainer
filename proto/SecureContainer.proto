@@ -1,0 +1,67 @@
+syntax = "proto3";
+package SecureContainerService;
+
+service Container{
+  rpc CreateContainer (CreateContainerRequest) returns (SecureContainerResponse);
+  rpc OpenContainer (OpenContainerRequest) returns (SecureContainerResponse);
+  rpc CloseContainer (CloseContainerRequest) returns (SecureContainerResponse);
+  rpc ExportContainer (ExportContainerRequest) returns (SecureContainerResponse);
+  rpc ImportContainer (ImportContainerRequest) returns (SecureContainerResponse);
+  rpc AddToAutoOpen (AddToAutoOpenRequest) returns (SecureContainerResponse);
+  rpc RemoveFromAutoOpen (RemoveFromAutoOpenRequest) returns (SecureContainerResponse);
+}
+
+
+message CreateContainerRequest {
+  int32 size = 1;
+  string mountPoint = 2;
+  string path = 3;
+  string namespace = 4;
+  string id = 5;
+  bool autoOpen = 6;
+}
+
+message OpenContainerRequest {
+  string mountPoint = 1;
+  string path = 2;
+  string namespace = 3;
+  string id = 4;
+}
+
+message CloseContainerRequest {
+  string mountPoint = 1;
+  string namespace = 2;
+}
+
+message ExportContainerRequest {
+  string path = 1;
+  string namespace = 2;
+  string id = 3;
+  string secret = 4;
+}
+
+message ImportContainerRequest {
+  string path = 1;
+  string namespace = 2;
+  string id = 3;
+  string secret = 4;
+}
+
+message AddToAutoOpenRequest {
+  string mountPoint = 1;
+  string path = 2;
+  string namespace = 3;
+  string id = 4;
+}
+
+message RemoveFromAutoOpenRequest {
+  string mountPoint = 1;
+  string path = 2;
+  string namespace = 3;
+  string id = 4;
+}
+
+message SecureContainerResponse {
+  bool status = 1;
+  string error = 2;
+}

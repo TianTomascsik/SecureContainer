@@ -1,0 +1,52 @@
+[package]
+name = "SecureContainer"
+version = "0.1.0"
+edition = "2021"
+description = "A project to create a secure container for storing sensitive data"
+license = "Apache-2.0"
+authors = ["Tian Tomascsik tian.tomascsik@gmail.com"]
+
+
+
+[dependencies]
+libuta-rs = { path = "./libuta-rs" }
+base64 = "0.21.7"
+ring = "0.17.8"
+chrono = "0.4.34"
+signal-hook = "0.3.17"
+tonic = "0.11.0"
+prost = "0.12.3"
+tokio = { version = "1.36.0", features = ["macros","rt-multi-thread"] }
+clap = { version = "4.5.3", features = [ "derive" ] }
+#hyper = "0.14.28"
+ctrlc = "3.4.4"
+
+
+
+[[bin]]
+name = "secure_container_daemon"
+path = "src/daemon.rs"
+
+[[bin]]
+name = "secure_container_cli"
+path = "src/cli.rs"
+
+[lib]
+name = "secure_container_lib"
+path = "src/lib.rs"
+
+
+[build-dependencies]
+tonic-build = "0.11.0"
+
+[package.metadata.deb]
+maintainer = "Tian Tomascsik <tian.tomascsik@gmail.com>"
+copyright = "Tian Tomascsik 2024"
+depends = "$auto,libuta-derive-tool"
+section = "utiity"
+priority = "optional"
+assets=[[ "target/release/secure_container_daemon", "/usr/bin/secure_container_daemon"  ,"755"],
+        [ "target/release/secure_container_cli", "/usr/bin/secure_container_cli","755"]]
+
+
+
