@@ -2,18 +2,68 @@
 
 ## Purpose
 
-The purpose of this component is to provide a way to securely store sensitive data through LUKS containers while checking the integirty of the data.
+The purpose of this component is to provide a way to securely store sensitive data through LUKS containers while checking the integrity of the data.
 
-## Run
-
-Dependencies:
+## Build
 
 Install libuta unified Trust Anchor API: 
 https://github.com/siemens/libuta
 
+### Build dependencies
+
+You can install build dependencies using the command below:
+
 ```bash
-apt-get install cryptestup 
+apt-get install cargo cryptsetup libclang-dev clang llvm rustup 
+rustup toolchain install nightly
+rustup default nightly
 ```
+
+### Debug build 
+
+```bash
+cargo build
+```
+
+### Release build 
+
+Optimises for size and strips debug info.
+
+```bash
+cargo build --release
+```
+
+### Build debian package
+
+First install cargo-deb with the following command:
+
+```bash
+cargo install cargo-deb
+
+```
+Then you can build the debian package unseing this command:
+```bash
+cargo deb
+```
+
+
+## Run
+
+### Install debian package
+
+```bash
+dpkg -i target/debian/secure-container_0.1.0-1_amd64.deb
+```
+
+### Run the Software
+
+When the software is started for the first time, the AutoOpen file must be created with the following command: 
+
+```bash
+> touch /usr/bin/auto_open
+```
+
+
 To properly utilise this tool, the `secure_container_daemon` must be started as it serves as a gRPC server for the `secure_container_cli`.
 
 Possible commands for `secure_container_cli` are `create`, `open`, `close`, `export` and `import`.
@@ -36,11 +86,7 @@ To run the `secure_container_cli`:
 > secure_container_cli <COMMAD>
 ```
 
-### Install debian package
 
-```bash
-dpkg -i target/debian/secure-container_0.1.0-1_amd64.deb
-```
 
 ## Usage
 To interact with the secure container daemon, there are three possible ways to achive this:
