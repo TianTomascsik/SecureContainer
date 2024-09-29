@@ -52,7 +52,7 @@ cargo deb
 ### Install debian package
 
 ```bash
-dpkg -i target/debian/secure-container_0.1.0-1_amd64.deb
+dpkg -i  target/debian/securecontainer_0.1.0-1_*.deb
 ```
 
 ### Run the Software
